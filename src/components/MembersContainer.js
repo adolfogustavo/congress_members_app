@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MembersAPI from './MembersAPI';
 import MembersHeader from './Common/MembersHeader';
-import MembersList from './MembersList';
 import MembersFooter from './Common/MembersFooter';
+import MembersChooseType from './MembersChooseType';
+import MembersList from './MembersList';
 import MembersAdvanceSearch from './MembersAdvanceSearch';
 import MembersSearch from './MembersSearch';
 import MembersPagination from './MembersPagination';
@@ -51,10 +52,10 @@ class MembersContainer extends Component {
 
   handleOptionsChange(value) {
     let { members } = this.state;
-    this.setState({ optionSelector: value, data: members, filtered: members })
+    this.setState({ optionSelector: value, data: members, filtered: members, currentPage: 1 })
   }
 
-  async handleAdvanceSearch(value) {    
+  handleAdvanceSearch = async(value) => {    
     let selectedOption = this.state.optionSelector.value;
     let { members } = this.state;
     await this.setState({ data: members })
@@ -80,7 +81,7 @@ class MembersContainer extends Component {
     }
   }
 
-  async handleTypeOfMembers(type) {
+  handleTypeOfMembers = async (type) => {
     this.setState({ isLoading: true, membersType: type });
 
     const members = await MembersAPI.getMembers(type);
@@ -101,12 +102,7 @@ class MembersContainer extends Component {
       <Fragment>
       <div className="bg-light-gray main-container">
         <MembersHeader title={"Current members of the U.S Congress"} subtitle={""}/>
-        <div className="button-group-container pt2 pb2 bg-light-gray">
-          <div className="btn-group">
-            <button type="button" className={membersType === 'house' ? `btn btn-outline-dark btn-md tc active`: `btn btn-outline-dark btn-md tc`} onClick={() => this.handleTypeOfMembers('house') }>House</button>
-            <button type="button" className={membersType === 'senate' ? `btn btn-outline-dark btn-md tc active`: `btn btn-outline-dark btn-md tc`} onClick={() => this.handleTypeOfMembers('senate') }>Senators</button>
-          </div>
-        </div>
+        <MembersChooseType handleTypeOfMembers={this.handleTypeOfMembers} membersType={membersType} />
         <div className="flex bg-light-gray">
           <MembersSearch searchString={this.state.searchString} handleInputSearch={this.handleInputSearchChange}/>
           <MembersAdvanceSearch handleOptionsChange={this.handleOptionsChange} handleAdvanceSearch={this.handleAdvanceSearch} option={optionSelector} optionAdvance={optionAdvanceSelector} />
