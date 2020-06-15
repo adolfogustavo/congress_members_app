@@ -1,0 +1,70 @@
+@import "./common.scss";
+
+.item-list {
+  cursor: pointer;
+  background-color: #fff;
+  padding: 25px 0 25px 0;
+  margin: 10px 0 10px 0;
+  border-bottom: 1px solid #ccc;
+  &:hover {
+    background-color: #fafafa;
+  }
+}
+
+.item-list-header {
+  background-color: #fafafa;
+}
+
+.button-group-container {
+  display: flex;
+  justify-content: center;
+}
+
+.members-search {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 10px;
+  margin: 3px 10px 0 10px;
+  width: 500px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-members {
+  display: flex;
+  justify-content: center;
+  padding: 5vh;
+}
+
+.main-container {
+  min-height: 100vh;
+}
+
+.members-container {
+  min-height: 52vh;
+}
+
+.search-no-results {
+  padding-top: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
+.member-info-container {
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 4vh;
+  padding: 5px;
+}
+
+.roles {
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  color: gray;
+}
